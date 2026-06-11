@@ -216,9 +216,12 @@ export default function App() {
     fd.append("transformation", transformation);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/process-transformation", {
-        method: "POST", body: fd,
-      });
+      // Inside your generate() function
+      console.log(`${import.meta.env.VITE_API_URL}`);
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/process-transformation`, {
+    method: "POST", 
+    body: fd,
+});
       if (!res.ok) throw new Error(`Server error ${res.status}`);
       setResult(URL.createObjectURL(await res.blob()));
     } catch (err) {
